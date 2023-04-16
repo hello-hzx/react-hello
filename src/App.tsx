@@ -1,15 +1,13 @@
-import React, {FC} from 'react';
-import {Button} from "antd";
+import React from 'react';
+import { Button } from 'antd';
 
-const App: FC = () => {
+function App() {
   const onClick = () => {
     window.open('./about.html');
   };
   return (
-      <>
-        <Button onClick={onClick}>index按钮</Button>
-      </>
+    <Button onClick={onClick}>index按钮</Button>
   );
-};
+}
 
 export default App;

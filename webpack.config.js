@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const ESLintWebpackPlugin = require("eslint-webpack-plugin");
 
 module.exports = (env) => {
   const isEnvDevelopment = env.development;
@@ -113,6 +114,7 @@ module.exports = (env) => {
         filename: 'static/css/[name].[contenthash:8].css',
         chunkFilename: 'static/css/[name].[contenthash:8].css',
       }),
+      new ESLintWebpackPlugin(),
     ],
     optimization: {
       minimize: !isEnvDevelopment,
@@ -162,6 +164,7 @@ module.exports = (env) => {
       hot: true,
       client: {
         logging: 'none',
+        overlay: false, // 关闭浏览器页面显示eslint错误
       },
       watchFiles: ['./src'],
       open: true,
