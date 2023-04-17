@@ -18,15 +18,6 @@ module.exports = (env) => {
       },
       {
         loader: 'postcss-loader',
-        options: {
-          postcssOptions: {
-            plugins: [
-              'postcss-flexbugs-fixes',
-              'postcss-normalize',
-              'autoprefixer',
-            ],
-          },
-        },
       },
     ];
   };
@@ -115,6 +106,7 @@ module.exports = (env) => {
         chunkFilename: 'static/css/[name].[contenthash:8].css',
       }),
       new ESLintWebpackPlugin(),
+
     ],
     optimization: {
       minimize: !isEnvDevelopment,
@@ -157,7 +149,7 @@ module.exports = (env) => {
       },
     },
     devServer: {
-      port: 8080,
+      port: 80,
       static: './dest',
       compress: true,
       historyApiFallback: true,
