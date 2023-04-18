@@ -1,8 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
 function AboutApp() {
   return <h1>About</h1>;
 }
 
-ReactDOM.render(<AboutApp />, document.getElementById('root'));
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement,
+);
+root.render(<AboutApp />);
