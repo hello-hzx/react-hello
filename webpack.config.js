@@ -3,24 +3,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const ESLintWebpackPlugin = require("eslint-webpack-plugin");
+const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 
 module.exports = (env) => {
   const isEnvDevelopment = env.development;
-  const getStyleLoaders = () => {
-    return [
-      isEnvDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-      {
-        loader: 'css-loader',
-        options: {
-          importLoaders: 1,
-        },
+  const getStyleLoaders = () => [
+    isEnvDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1,
       },
-      {
-        loader: 'postcss-loader',
-      },
-    ];
-  };
+    },
+    {
+      loader: 'postcss-loader',
+    },
+  ];
 
   return {
     entry: {
@@ -31,8 +29,9 @@ module.exports = (env) => {
     devtool: isEnvDevelopment ? 'eval-cheap-module-source-map' : false,
     output: {
       path: path.resolve(__dirname, './dist'),
-      filename: 'static/js/[name].[contenthash:8].js',
+      filename: isEnvDevelopment ? 'static/js/[name].js' : 'static/js/[name].[contenthash:8].js',
       clean: true,
+      pathinfo: false,
     },
     module: {
       strictExportPresence: true,
@@ -43,7 +42,7 @@ module.exports = (env) => {
             loader: 'babel-loader',
             options: {
               presets: [
-                ['@babel/preset-env', {modules: false}],
+                ['@babel/preset-env', { modules: false }],
                 '@babel/preset-react',
               ],
               plugins: [
@@ -70,13 +69,16 @@ module.exports = (env) => {
         {
           test: /\.ts(x)?$/,
           loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+          },
           exclude: /node_modules/,
         },
         {
           test: /\.(svg|png|jpe?g)$/,
           type: 'asset',
           generator: {
-            filename: 'static/media/[contenthash:8][ext]',
+            filename: isEnvDevelopment ? 'static/js/[name].js' : 'static/media/[contenthash:8][ext]',
           },
           parser: {
             dataUrlCondition: {
@@ -91,19 +93,19 @@ module.exports = (env) => {
         inject: 'body',
         template: 'public/index.html',
         favicon: 'public/favicon.ico',
-        filename: "index.html",
+        filename: 'index.html',
         chunks: ['index'],
       }),
       new HtmlWebpackPlugin({
         inject: 'body',
         template: 'public/index.html',
         favicon: 'public/favicon.ico',
-        filename: "about.html",
+        filename: 'about.html',
         chunks: ['about'],
       }),
       new MiniCssExtractPlugin({
-        filename: 'static/css/[name].[contenthash:8].css',
-        chunkFilename: 'static/css/[name].[contenthash:8].css',
+        filename: isEnvDevelopment ? 'static/css/[name].css' : 'static/css/[name].[contenthash:8].css',
+        chunkFilename: isEnvDevelopment ? 'static/css/[name].css' : 'static/css/[name].[contenthash:8].css',
       }),
       new ESLintWebpackPlugin(),
 
@@ -120,6 +122,9 @@ module.exports = (env) => {
           },
         },
       },
+      removeAvailableModules: false,
+      removeEmptyChunks: false,
+      // splitChunks: false,
       minimizer: [
         new CssMinimizerWebpackPlugin(),
         new TerserPlugin({

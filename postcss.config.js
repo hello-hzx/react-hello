@@ -3,5 +3,5 @@ module.exports = {
     require('postcss-flexbugs-fixes'),
     require('postcss-normalize'),
     require('autoprefixer'),
-  ]
-}
+  ],
+};
