@@ -1,9 +1,13 @@
+const os = require('node:os');
 const path = require('node:path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const ESLintWebpackPlugin = require('eslint-webpack-plugin');
+
+// cpu核数，多进程打包
+const threads = os.cpus().length;
 
 module.exports = (env) => {
   const isEnvDevelopment = env.development;
@@ -29,7 +33,12 @@ module.exports = (env) => {
     devtool: isEnvDevelopment ? 'eval-cheap-module-source-map' : false,
     output: {
       path: path.resolve(__dirname, './dist'),
+      // 入口文件打包输出资源命名方式
       filename: isEnvDevelopment ? 'static/js/[name].js' : 'static/js/[name].[contenthash:8].js',
+      // 动态导入输出资源命名方式
+      chunkFilename: 'static/js/[name].chunk.js',
+      // 图片、字体等资源命名方式
+      assetModuleFilename: isEnvDevelopment ? 'static/media/[name][ext]' : 'static/media/[contenthash:8][ext]',
       clean: true,
       pathinfo: false,
     },
@@ -37,54 +46,65 @@ module.exports = (env) => {
       strictExportPresence: true,
       rules: [
         {
-          test: /\.(js?x)$/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                ['@babel/preset-env', { modules: false }],
-                '@babel/preset-react',
+          oneOf: [ // 打包时每个文件都会经过所有 loader 处理，`test` 正则不匹配不处理，但是都要过一遍。比较慢。
+            {
+              test: /\.(js?x)$/,
+              use: [
+                {
+                  loader: 'thread-loader', // 开启多进程
+                  options: {
+                    workers: threads, // 数量
+                  },
+                },
+                {
+                  loader: 'babel-loader',
+                  options: {
+                    presets: [
+                      ['@babel/preset-env', {modules: false}],
+                      '@babel/preset-react',
+                    ],
+                    plugins: [
+                      [
+                        '@babel/plugin-transform-runtime',
+                      ],
+                    ],
+                    cacheDirectory: true, // 开启babel编译缓存 [缓存之前的 Eslint 检查 和 Babel 编译结果，第二次打包时速度就会更快]
+                    cacheCompression: false, // 缓存文件不要压缩
+                  },
+                },
               ],
-              plugins: [
-                [
-                  '@babel/plugin-transform-runtime',
-                ],
+              exclude: /node_modules/,
+            },
+            {
+              test: /\.css$/,
+              use: getStyleLoaders(),
+              exclude: /\.module\.css$/,
+            },
+            {
+              test: /\.less$/,
+              use: [
+                ...getStyleLoaders(),
+                'less-loader',
               ],
             },
-          },
-          exclude: /node_modules/,
-        },
-        {
-          test: /\.css$/,
-          use: getStyleLoaders(),
-          exclude: /\.module\.css$/,
-        },
-        {
-          test: /\.less$/,
-          use: [
-            ...getStyleLoaders(),
-            'less-loader',
+            {
+              test: /\.ts(x)?$/,
+              loader: 'ts-loader',
+              options: {
+                transpileOnly: true,
+              },
+              exclude: /node_modules/,
+            },
+            {
+              test: /\.(svg|png|jpe?g)$/,
+              type: 'asset',
+              parser: {
+                dataUrlCondition: {
+                  maxSize: 10 * 1024,
+                },
+              },
+            },
           ],
-        },
-        {
-          test: /\.ts(x)?$/,
-          loader: 'ts-loader',
-          options: {
-            transpileOnly: true,
-          },
-          exclude: /node_modules/,
-        },
-        {
-          test: /\.(svg|png|jpe?g)$/,
-          type: 'asset',
-          generator: {
-            filename: isEnvDevelopment ? 'static/js/[name].js' : 'static/media/[contenthash:8][ext]',
-          },
-          parser: {
-            dataUrlCondition: {
-              maxSize: 10 * 1024,
-            },
-          },
         },
       ],
     },
@@ -107,12 +127,22 @@ module.exports = (env) => {
         filename: isEnvDevelopment ? 'static/css/[name].css' : 'static/css/[name].[contenthash:8].css',
         chunkFilename: isEnvDevelopment ? 'static/css/[name].css' : 'static/css/[name].[contenthash:8].css',
       }),
-      new ESLintWebpackPlugin(),
+      new ESLintWebpackPlugin({
+        context: path.resolve(__dirname, 'src'),
+        exclude: 'node_modules', // 默认值
+        cache: true, // 开启缓存
+        // 缓存目录
+        cacheLocation: path.resolve(
+          __dirname,
+          '../node_modules/.cache/.eslintcache',
+        ),
+        threads, // 开启多进程
+      }),
 
     ],
     optimization: {
       minimize: !isEnvDevelopment,
-      splitChunks: {
+      splitChunks: { // 代码分割配置
         chunks: 'all',
         cacheGroups: {
           vendor: {
@@ -128,25 +158,7 @@ module.exports = (env) => {
       minimizer: [
         new CssMinimizerWebpackPlugin(),
         new TerserPlugin({
-          terserOptions: {
-            parse: {
-              ecma: 8,
-            },
-            compress: {
-              ecma: 5,
-              warnings: false,
-              comparisons: false,
-              inline: 2,
-            },
-            mangle: {
-              safari10: true,
-            },
-            output: {
-              ecma: 5,
-              comments: false,
-              ascii_only: true,
-            },
-          },
+          parallel: threads, // 开启多进程
         }),
       ],
       runtimeChunk: {

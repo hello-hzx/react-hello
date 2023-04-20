@@ -1,3 +1,4 @@
 .div-flex {
   display: flex;
+  background-image: url("./static/hello.jpg");
 }
