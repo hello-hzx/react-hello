@@ -20,6 +20,7 @@ module.exports = {
     'react',
   ],
   rules: {
-    'react/function-component-definition': OFF,
+    'react/function-component-definition': OFF, // react函数式组件的定义方式
+    'import/prefer-default-export': OFF, // 只有一个导出时，优先动态导入
   },
 };
