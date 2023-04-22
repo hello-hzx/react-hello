@@ -1,3 +1,4 @@
+const OFF = 0;
 module.exports = {
   env: {
     browser: true,
@@ -8,8 +9,7 @@ module.exports = {
     'airbnb-typescript',
     'plugin:react-hooks/recommended',
   ],
-  overrides: [
-  ],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -20,5 +20,6 @@ module.exports = {
     'react',
   ],
   rules: {
+    'react/function-component-definition': OFF,
   },
 };

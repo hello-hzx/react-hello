@@ -11,7 +11,7 @@ const threads = os.cpus().length;
 
 module.exports = (env) => {
   const isEnvDevelopment = env.development;
-  const getStyleLoaders = () => [
+  const getStyleLoaders = (preLoader) => [
     isEnvDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
     {
       loader: 'css-loader',
@@ -21,12 +21,23 @@ module.exports = (env) => {
     },
     {
       loader: 'postcss-loader',
+      options: {
+        postcssOptions: {
+          plugins: [
+            'postcss-flexbugs-fixes',
+            'postcss-normalize',
+            'autoprefixer',
+            'postcss-preset-env',
+          ],
+        },
+      },
     },
-  ];
+    preLoader,
+  ].filter(Boolean);
 
   return {
     entry: {
-      about: './src/about.tsx',
+      about: './src/About.tsx',
       index: './src/index.tsx',
     },
     mode: isEnvDevelopment ? 'development' : 'production',
@@ -60,7 +71,7 @@ module.exports = (env) => {
                   loader: 'babel-loader',
                   options: {
                     presets: [
-                      ['@babel/preset-env', {modules: false}],
+                      ['@babel/preset-env', { modules: false }],
                       '@babel/preset-react',
                     ],
                     plugins: [
@@ -83,8 +94,7 @@ module.exports = (env) => {
             {
               test: /\.less$/,
               use: [
-                ...getStyleLoaders(),
-                'less-loader',
+                ...getStyleLoaders('less-loader'),
               ],
             },
             {
