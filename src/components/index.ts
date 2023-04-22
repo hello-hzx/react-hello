@@ -1,5 +1,6 @@
 import React from 'react';
 
+/** 禁止在需要动态导出的文件中使用默认导出（default export） */
 const importAllComponents = () => {
   const files: any = {};
   const requireModule = require.context('./', true, /\.tsx$/);

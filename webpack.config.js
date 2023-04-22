@@ -41,7 +41,7 @@ module.exports = (env) => {
       index: './src/index.tsx',
     },
     mode: isEnvDevelopment ? 'development' : 'production',
-    devtool: isEnvDevelopment ? 'eval-cheap-module-source-map' : false,
+    devtool: isEnvDevelopment ? 'eval-cheap-module-source-map' : 'source-map',
     output: {
       path: path.resolve(__dirname, './dist'),
       // 入口文件打包输出资源命名方式
