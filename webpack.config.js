@@ -172,7 +172,7 @@ module.exports = (env) => {
         }),
       ],
       runtimeChunk: {
-        key: (entrypoint) => `runtime~${entrypoint.name}`,
+        name: (entrypoint) => `runtime~${entrypoint.name}`,
       },
     },
     devServer: {
