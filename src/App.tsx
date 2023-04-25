@@ -18,7 +18,7 @@ function App() {
         <Button onClick={() => change('Axios')}>Axios</Button>
         <Button>Mobx</Button>
         <Button>Redux</Button>
-        <Button>React</Button>
+        <Button onClick={() => change('ReactComp')}>React</Button>
         <Button>React Query</Button>
         <Button>React Router</Button>
       </div>

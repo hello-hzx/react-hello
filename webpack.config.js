@@ -41,7 +41,7 @@ module.exports = (env) => {
       index: './src/index.tsx',
     },
     mode: isEnvDevelopment ? 'development' : 'production',
-    devtool: isEnvDevelopment ? 'eval-cheap-module-source-map' : 'source-map',
+    devtool: isEnvDevelopment ? 'inline-source-map' : 'source-map',
     output: {
       path: path.resolve(__dirname, './dist'),
       // 入口文件打包输出资源命名方式
@@ -157,7 +157,7 @@ module.exports = (env) => {
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
+            key: 'vendors',
             chunks: 'all',
           },
         },
@@ -172,7 +172,7 @@ module.exports = (env) => {
         }),
       ],
       runtimeChunk: {
-        name: (entrypoint) => `runtime~${entrypoint.name}`,
+        key: (entrypoint) => `runtime~${entrypoint.name}`,
       },
     },
     devServer: {
