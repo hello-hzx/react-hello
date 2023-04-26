@@ -20,7 +20,7 @@ function App() {
         <Button>Redux</Button>
         <Button onClick={() => change('ReactComp')}>React</Button>
         <Button>React Query</Button>
-        <Button>React Router</Button>
+        <Button onClick={() => change('RouterComp')}>React Router</Button>
       </div>
       {
         // @ts-ignore

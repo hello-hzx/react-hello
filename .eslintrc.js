@@ -22,5 +22,8 @@ module.exports = {
   rules: {
     'react/function-component-definition': OFF, // react函数式组件的定义方式
     'import/prefer-default-export': OFF, // 只有一个导出时，优先默认导入
+    'react/destructuring-assignment': OFF, // 解构使用道具
+    'react/jsx-props-no-spreading': OFF, // 解构道具分配
+    'react-hooks/rules-of-hooks': OFF, // React Hook cannot be called inside a callback.
   },
 };
