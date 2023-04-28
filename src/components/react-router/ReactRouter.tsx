@@ -2,10 +2,8 @@ import React, { PureComponent } from 'react';
 import {
   Link,
   Navigate,
-  Outlet,
-  Route,
-  Routes, useLocation,
-  useNavigate, useParams, useSearchParams,
+  Outlet, useLocation,
+  useNavigate, useParams, useRoutes, useSearchParams,
 } from 'react-router-dom';
 import { Button } from 'antd';
 import { WithRouter } from './hoc/WithRouter';
@@ -26,11 +24,15 @@ class UserCar extends PureComponent<any, any> {
     return (
       <>
         <h1>car: byd</h1>
-        <Button type="link" onClick={() => this.toPath('/home')}>to Home</Button>
+        <Button type="link" onClick={() => this.toPath('/home')}>
+          to
+          Home
+        </Button>
       </>
     );
   }
 }
+
 const UserCarWrapped = WithRouter(UserCar);
 
 const Home = () => {
@@ -80,23 +82,44 @@ const NotFound = () => (
   </>
 );
 
+/** 以配置的形式使用路由 */
+const routers = [
+  { path: '/', element: <Navigate to="/home" /> },
+  {
+    path: '/home',
+    element: <Home />,
+    children: [
+      {
+        path: '/home',
+        element: <Navigate to="/home/user/info?name=Trump&age=0" />,
+      },
+      { path: '/home/user/info', element: <UserInfo /> },
+      { path: '/home/user/car', element: <UserCarWrapped /> },
+    ],
+  },
+  { path: '/about', element: <About /> },
+  { path: '*', element: <NotFound /> },
+];
+
 export const ReactRouter = () => (
-  <>
-    <div className="nav" />
-    <div className="content">
-      {/* router5 中叫 Switch */}
-      <Routes>
-        {/* router5 中element叫component, Navigate叫Redirect，Navigate出现自动跳到指定to */}
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<Home />}>
-          {/* 子路由 */}
-          <Route path="/home" element={<Navigate to="/home/user/info?name=Trump&age=0" />} />
-          <Route path="/home/user/info" element={<UserInfo />} />
-          <Route path="/home/user/car" element={<UserCarWrapped />} />
-        </Route>
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
-  </>
+  // <>
+  //   <div className="content">
+  //     {/* router5 中叫 Switch */}
+  //     <Routes>
+  //       {/* router5 中element叫component, Navigate叫Redirect，Navigate出现自动跳到指定to */}
+  //       <Route path="/" element={<Navigate to="/home" />} />
+  //       <Route path="/home" element={<Home />}>
+  //         {/* 子路由 */}
+  //         <Route path="/home" element={<Navigate to="/home/user/info?name=Trump&age=0" />} />
+  //         <Route path="/home/user/info" element={<UserInfo />} />
+  //         <Route path="/home/user/car" element={<UserCarWrapped />} />
+  //       </Route>
+  //       <Route path="/about" element={<About />} />
+  //       <Route path="*" element={<NotFound />} />
+  //     </Routes>
+  //   </div>
+  // </>
+  <div className="content">
+    {useRoutes(routers)}
+  </div>
 );

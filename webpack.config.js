@@ -177,7 +177,7 @@ module.exports = (env) => {
     },
     devServer: {
       port: 80,
-      static: './dest',
+      static: './dist',
       compress: true,
       historyApiFallback: true,
       hot: true,
