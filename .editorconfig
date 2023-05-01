@@ -18,6 +18,8 @@ max_line_length = 80
 # 删除换行符和之前的任何空格字符
 trim_trailing_whitespace = true
 
+ij_any_space_before_colon = true
+
 [*.md]
 max_line_length = 0
 trim_trailing_whitespace = false

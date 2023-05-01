@@ -25,5 +25,6 @@ module.exports = {
     'react/destructuring-assignment': OFF, // 解构使用道具
     'react/jsx-props-no-spreading': OFF, // 解构道具分配
     'react-hooks/rules-of-hooks': OFF, // React Hook cannot be called inside a callback.
+    'react/jsx-one-expression-per-line': OFF,
   },
 };
