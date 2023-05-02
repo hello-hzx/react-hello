@@ -23,6 +23,25 @@ export class ClassComponent extends PureComponent<Props, State> {
     this.setState({
       num: 2,
     });
+
+    /**
+     * setState 异步：
+     *  1. 提高性能，获取多次setState，一次更新
+     *  2. 保证 state 与 子组件的 props 的一致性
+     *  https://github.com/facebook/react/issues/11527#issuecomment-360199710;
+     *
+     *  何时同步：react 18之前，这些情况会同步处理
+     *    https://zh-hans.react.dev/blog/2022/03/29/react-v18#whats-new-in-react-18
+     *
+     *  从 18 开始，所有 setState 都是批处理
+     *    Starting in React 18 with createRoot, all updates will be automatically batched,
+     *    no matter where they originate from.
+     *    https://github.com/reactwg/react-18/discussions/21
+     *
+     *  数据更新：arr = [{name: tom}, {name: jack}]
+     *  推荐（虽然只是浅拷贝）： const newArr = [...arr, {name: joe}]; this.steState({ arr: newArr });
+     *
+     * */
   }
 
   render() {
