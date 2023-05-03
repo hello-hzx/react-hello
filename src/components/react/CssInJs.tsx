@@ -1,30 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
+import classNames from 'classnames';
 
-const StyleWrapper = styled.div`
+const AppWrapper = styled.div`
   border: 1px solid black;
 
   .head {
     background-color: pink;
   }
-
-  .content {
-
-    .name {
-      font-size: 25px;
-    }
-  }
-
 `;
 
-/** css in js: styled-components */
+const nameColor = 'red';
+
+type ContentProps = {
+  nameSize: number,
+};
+const ContentWrapper = styled.div<ContentProps>`
+  border: 1px solid red;
+
+  .name {
+    // 使用动态传入的参数
+    font-size: ${(props) => props.nameSize}px;
+    // 使用其他参数
+    color: ${nameColor};
+  }
+`;
+
+/** css in js
+ * styled-components：
+ *  https://github.com/styled-components/styled-components
+ *
+ *
+ * */
 const CssInJs = () => (
-  <StyleWrapper className="app">
+  <AppWrapper className="app">
     <h1 className="head">标题</h1>
-    <div className="content">
+    {/* classNames 简单使用 */}
+    <ContentWrapper nameSize={30} className={classNames({ content: true })}>
       <span className="name">jack</span>
-    </div>
-  </StyleWrapper>
+    </ContentWrapper>
+  </AppWrapper>
 );
 
 export default CssInJs;
