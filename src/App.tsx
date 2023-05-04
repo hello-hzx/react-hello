@@ -17,7 +17,7 @@ function App() {
         <Button onClick={onClick}>多页面</Button>
         <Button onClick={() => change('Axios')}>Axios</Button>
         <Button>Mobx</Button>
-        <Button>Redux</Button>
+        <Button onClick={() => change('ReduxComp')}>Redux</Button>
         <Button onClick={() => change('ReactComp')}>React</Button>
         <Button>React Query</Button>
         <Button onClick={() => change('RouterComp')}>React Router</Button>

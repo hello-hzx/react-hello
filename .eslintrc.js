@@ -26,5 +26,6 @@ module.exports = {
     'react/jsx-props-no-spreading': OFF, // 解构道具分配
     'react-hooks/rules-of-hooks': OFF, // React Hook cannot be called inside a callback.
     'react/jsx-one-expression-per-line': OFF,
+    '@typescript-eslint/default-param-last': OFF, // 默认参数应该放在最后
   },
 };
