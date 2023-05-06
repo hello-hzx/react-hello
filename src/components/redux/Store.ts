@@ -1,6 +1,11 @@
 import { createStore } from 'redux';
 
-const initStore = {
+export type InfoType = {
+  name: string,
+  age: number,
+};
+
+const initStore:InfoType = {
   name: 'zs',
   age: 11,
 };

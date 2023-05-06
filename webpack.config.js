@@ -38,7 +38,7 @@ module.exports = (env) => {
   return {
     entry: {
       about: './src/About.tsx',
-      index: './src/ReactRedux.tsx',
+      index: './src/index.tsx',
     },
     mode: isEnvDevelopment ? 'development' : 'production',
     devtool: isEnvDevelopment ? 'inline-source-map' : 'source-map',
