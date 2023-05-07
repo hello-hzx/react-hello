@@ -4,7 +4,7 @@ import React, { useCallback, useState } from 'react';
 export const FunctionClosure = () => {
   const [name, setName] = useState('c#');
 
-  /** useCallback 记忆函数，如果[]为空，就是不更新onClick，name由于闭包name一直是‘c#’ */
+  /** useCallback 记忆函数，如果[]为空，onClick函数一直是最开始的那个，name由于闭包name一直是‘c#’ */
   const onClick = useCallback(() => {
     setName(`${name}js`);
   }, [name]);
