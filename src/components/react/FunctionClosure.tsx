@@ -14,8 +14,8 @@ export const FunctionClosure = () => {
   );
 };
 
-const fun = (name: string) => () => {
-  window.console.log(name);
+const fun = (_name: string) => () => {
+  // window.console.log(name);
 };
 
 const funJava = fun('java');

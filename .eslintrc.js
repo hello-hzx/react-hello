@@ -24,9 +24,10 @@ module.exports = {
     'import/prefer-default-export': OFF, // 只有一个导出时，优先默认导入
     'react/destructuring-assignment': OFF, // 解构使用道具
     'react/jsx-props-no-spreading': OFF, // 解构道具分配
-    'react-hooks/rules-of-hooks': OFF, // React Hook cannot be called inside a callback.
+    'react-hooks/rules-of-hooks': OFF, // React Hook cannot be called inside a callback
     'react/jsx-one-expression-per-line': OFF,
     '@typescript-eslint/default-param-last': OFF, // 默认参数应该放在最后
-    'react/button-has-type': OFF, // 指定button的type，表单元素中包含按钮，默认为type=submit。
+    'react/button-has-type': OFF, // 指定button的type，表单元素中包含按钮，默认为type=submit
+    "@typescript-eslint/no-unused-vars": ['error', { 'argsIgnorePattern': '_' }], // 声明变量未被使用
   },
 };
