@@ -27,5 +27,6 @@ module.exports = {
     'react-hooks/rules-of-hooks': OFF, // React Hook cannot be called inside a callback.
     'react/jsx-one-expression-per-line': OFF,
     '@typescript-eslint/default-param-last': OFF, // 默认参数应该放在最后
+    'react/button-has-type': OFF, // 指定button的type，表单元素中包含按钮，默认为type=submit。
   },
 };
