@@ -28,6 +28,6 @@ module.exports = {
     'react/jsx-one-expression-per-line': OFF,
     '@typescript-eslint/default-param-last': OFF, // 默认参数应该放在最后
     'react/button-has-type': OFF, // 指定button的type，表单元素中包含按钮，默认为type=submit
-    "@typescript-eslint/no-unused-vars": ['error', { 'argsIgnorePattern': '_' }], // 声明变量未被使用
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '_' }], // 声明变量未被使用
   },
 };

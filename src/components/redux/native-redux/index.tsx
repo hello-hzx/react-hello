@@ -6,7 +6,6 @@ import { store } from './Reducer';
 /** 原生操作 Redux，Redux 和 React 没有关系。Redux 支持 React、Angular、Ember、jQuery 甚至纯 JavaScript */
 export const NativeRedux = () => {
   const [name, setName] = useState<string>(store.getState().name);
-
   useEffect(() => {
     // 订阅数据变化
     const unsubscribe = store.subscribe(() => {

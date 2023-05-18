@@ -1,6 +1,6 @@
 import { request1 } from '../index';
 
-type Commit = {
+export type Commit = {
   author: any,
   commit: any,
   committer: any
