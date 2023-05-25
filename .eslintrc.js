@@ -29,5 +29,7 @@ module.exports = {
     '@typescript-eslint/default-param-last': OFF, // 默认参数应该放在最后
     'react/button-has-type': OFF, // 指定button的type，表单元素中包含按钮，默认为type=submit
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '_' }], // 声明变量未被使用
+    'no-plusplus': OFF, // 允许使用 ++
+    'no-console': OFF, // 允许console
   },
 };
