@@ -13,3 +13,6 @@
   - 所有 prototype 中的 functions 都成为 autoAction。
   - 所有 prototype 中的 generator functions 都成为 flow。（需要注意，generators 函数在某些编译器配置中无法被检测到，如果 flow 没有正常运行，请务必明确地指定 flow 注解。）
   - 在 overrides 参数中标记为 false 的成员将不会被添加注解。例如，将其用于像标识符这样的只读字段。
+
+
+- runInAction(fn)：创建一个会被立即调用的临时 action。在异步进程中非常有用。
