@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from 'antd';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import {
+  connect, shallowEqual, useDispatch, useSelector,
+} from 'react-redux';
 import { changeNameCreator } from './name/ActionCreater';
 import { requestData } from './age/ActionCreater';
 
@@ -35,7 +37,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ReactRedux);
  * ***********************************
  * */
 export const ReactReduxHooks = () => {
-  const info = useSelector((data: any) => data);
+  const info = useSelector((state: any) => state, shallowEqual);
   const dispatch = useDispatch();
 
   const onClick = () => {
@@ -54,7 +56,13 @@ export const ReactReduxHooks = () => {
  * ***********************************
  * */
 export const ReduxRequestToStore = () => {
-  const info = useSelector((data : { name: { name: string }, age: { age: number } }) => data);
+  const info = useSelector(
+    (data: {
+      name: { name: string },
+      age: { age: number }
+    }) => data,
+    shallowEqual,
+  );
   const dispatch = useDispatch();
 
   const onClick = () => {

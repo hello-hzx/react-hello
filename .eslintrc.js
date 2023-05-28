@@ -31,5 +31,6 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '_' }], // 声明变量未被使用
     'no-plusplus': OFF, // 允许使用 ++
     'no-console': OFF, // 允许console
+    'no-param-reassign': OFF, // 直接修改函数参数
   },
 };
