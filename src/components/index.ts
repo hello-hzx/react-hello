@@ -1,25 +1,22 @@
 import React from 'react';
 
-/** 禁止在需要动态导出的文件中使用默认导出（default export） */
-const importAllComponents = () => {
-  const files: any = {};
+let module = {};
+if (import.meta.webpackHot) {
+  /** 禁止在需要动态导出的文件中使用默认导出（default export） */
   const requireModule = require.context('./', true, /\.tsx$/);
-  const compMapping: Record<string, React.Component | React.FC> = {};
-
   requireModule.keys().forEach((fileName) => {
-    files[fileName] = requireModule(fileName);
+    module[fileName] = requireModule(fileName);
   });
+} else {
+  module = import.meta.glob('./*/*.tsx', { eager: true });
+}
 
-  Object.values(files).forEach((file: any) => {
-    Object.entries(file).forEach((exportItemData: any) => {
-      const [componentName, comp] = exportItemData;
-      compMapping[componentName] = comp;
-    });
+const components: Record<string, React.ElementType> = {};
+Object.values(module).forEach((item) => {
+  Object.entries(item).forEach((exportItem) => {
+    const [name, comp] = exportItem;
+    components[name] = comp;
   });
-
-  return compMapping;
-};
-
-const components = importAllComponents();
+});
 
 export default components;

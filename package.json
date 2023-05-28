@@ -4,6 +4,8 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --env development",
+    "start:dev": "vite",
+    "preview": "vite preview",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -43,6 +45,7 @@
     "@types/webpack-env": "^1.18.0",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.58.0",
+    "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
     "babel-plugin-named-asset-import": "^0.3.8",
@@ -74,6 +77,8 @@
     "thread-loader": "^4.0.1",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.4",
+    "vite": "^4.3.9",
+    "vite-plugin-html": "^3.2.0",
     "webpack": "^5.79.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.13.3",

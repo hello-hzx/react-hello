@@ -15,7 +15,7 @@ function App() {
     <>
       <div className="start-option">
         <Button onClick={onClick}>多页面</Button>
-        <Button onClick={() => change('Axios')}>Axios</Button>
+        <Button onClick={() => change('AxiosComp')}>Axios</Button>
         <Button onClick={() => change('MobxComp')}>Mobx</Button>
         <Button onClick={() => change('ReduxComp')}>Redux</Button>
         <Button onClick={() => change('ReactComp')}>React</Button>
@@ -23,7 +23,6 @@ function App() {
         <Button onClick={() => change('RouterComp')}>React Router</Button>
       </div>
       {
-        // @ts-ignore
         name && <Comp />
       }
     </>

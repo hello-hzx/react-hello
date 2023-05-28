@@ -32,5 +32,6 @@ module.exports = {
     'no-plusplus': OFF, // 允许使用 ++
     'no-console': OFF, // 允许console
     'no-param-reassign': OFF, // 直接修改函数参数
+    'import/no-import-module-exports': OFF, // 在CommonJS导出的模块中使用import声明
   },
 };
