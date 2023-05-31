@@ -9,12 +9,6 @@ import { ReactColor } from './ReactColor';
 export const ReactComp = () => (
   <>
     <ReactColor />
-    <ReactColor />
-    <ReactColor />
-    <ReactColor />
-    <ReactColor />
-    <ReactColor />
-    <ReactColor />
     <I18nextReact />
     <AddChildren />
     <ClassComponent />

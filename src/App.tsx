@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
-import './static/index.less';
-import components from './components';
+import '@/static/index.less';
+import components from '@/components';
 
 function App() {
   const [name, setName] = useState<string>();
