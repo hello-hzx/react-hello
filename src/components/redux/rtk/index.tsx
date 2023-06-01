@@ -1,14 +1,13 @@
 import React from 'react';
-import {
-  Provider, shallowEqual, useDispatch, useSelector,
-} from 'react-redux';
+import { Provider, shallowEqual } from 'react-redux';
 import { Button } from 'antd';
+import { useAppDispatch, useAppSelector } from '@/components/redux/rtk/hooks';
 import { store } from './Store';
 import { addAge, requestToStoreAction } from './modules/Person';
 
 const Show = () => {
-  const { person } = useSelector((state: any) => state, shallowEqual);
-  const dispatch = useDispatch();
+  const { person } = useAppSelector((state) => state, shallowEqual);
+  const dispatch = useAppDispatch();
   return (
     <Button
       onClick={() => {

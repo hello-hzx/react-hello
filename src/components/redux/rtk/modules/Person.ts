@@ -1,20 +1,30 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { request1 } from '../../../axios/service';
 import { Commit } from '../../../axios/service/module/User';
+
+type PersonStateType = {
+  key: string
+  obj: {
+    name: string,
+    age: number,
+  },
+};
+
+const initialState: PersonStateType = {
+  key: '66',
+  obj: {
+    name: 'Jack',
+    age: 12,
+  },
+};
 
 // person slice
 const personSlice = createSlice(
   {
     name: 'person',
-    initialState: {
-      key: '66',
-      obj: {
-        name: 'Jack',
-        age: 12,
-      },
-    },
+    initialState,
     reducers: {
-      addAge(state, action) {
+      addAge(state, action: PayloadAction<number>) {
         const { payload } = action;
         state.obj.age += payload;
       },
