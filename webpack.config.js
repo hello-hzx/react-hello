@@ -21,16 +21,6 @@ module.exports = (env) => {
     },
     {
       loader: 'postcss-loader',
-      options: {
-        postcssOptions: {
-          plugins: [
-            'postcss-flexbugs-fixes',
-            'postcss-normalize',
-            'autoprefixer',
-            'postcss-preset-env',
-          ],
-        },
-      },
     },
     preLoader,
   ].filter(Boolean);
