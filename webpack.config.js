@@ -45,11 +45,11 @@ module.exports = (env) => {
     output: {
       path: path.resolve(__dirname, './dist'),
       // 入口文件打包输出资源命名方式
-      filename: isEnvDevelopment ? 'static/js/[name].js' : 'static/js/[name].[contenthash:8].js',
+      filename: isEnvDevelopment ? 'asset/js/[name].js' : 'asset/js/[name].[contenthash:8].js',
       // 动态导入输出资源命名方式
-      chunkFilename: 'static/js/[name].chunk.js',
+      chunkFilename: 'asset/js/[name].chunk.js',
       // 图片、字体等资源命名方式
-      assetModuleFilename: isEnvDevelopment ? 'static/media/[name][ext]' : 'static/media/[contenthash:8][ext]',
+      assetModuleFilename: isEnvDevelopment ? 'asset/media/[name][ext]' : 'asset/media/[contenthash:8][ext]',
       clean: true,
       pathinfo: false,
     },
@@ -134,8 +134,8 @@ module.exports = (env) => {
         chunks: ['about'],
       }),
       new MiniCssExtractPlugin({
-        filename: isEnvDevelopment ? 'static/css/[name].css' : 'static/css/[name].[contenthash:8].css',
-        chunkFilename: isEnvDevelopment ? 'static/css/[name].css' : 'static/css/[name].[contenthash:8].css',
+        filename: isEnvDevelopment ? 'asset/css/[name].css' : 'asset/css/[name].[contenthash:8].css',
+        chunkFilename: isEnvDevelopment ? 'asset/css/[name].css' : 'asset/css/[name].[contenthash:8].css',
       }),
       new ESLintWebpackPlugin({
         context: path.resolve(__dirname, 'src'),

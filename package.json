@@ -6,7 +6,8 @@
     "start": "webpack serve --env development",
     "start:dev": "vite",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "eslint": "eslint ./src --fix"
   },
   "dependencies": {
     "@craftjs/core": "^0.2.0-beta.10",
@@ -26,6 +27,7 @@
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.3.1",
+    "react-icons": "^4.9.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
     "react-transition-group": "^4.4.5",
