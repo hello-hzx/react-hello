@@ -24,6 +24,8 @@ export default defineConfig(() => {
     // build configure
     build: {
       outDir: "build",
+      // target: 'es2015', // 最低支持 es2015（ES6）
+      // polyfillDynamicImport: true,
 
       minify: "esbuild",
       rollupOptions: {
