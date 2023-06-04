@@ -49,6 +49,25 @@ module.exports = (env) => {
         {
           oneOf: [ // 打包时每个文件都会经过所有 loader 处理，`test` 正则不匹配不处理，但是都要过一遍。比较慢。
             {
+              test: /\.ts(x)?$/,
+              use: [
+                {
+                  loader: 'babel-loader',
+                  options: {
+                    cacheDirectory: true, // 开启babel编译缓存 [缓存之前的 Eslint 检查 和 Babel 编译结果，第二次打包时速度就会更快]
+                    cacheCompression: false, // 缓存文件不要压缩
+                  },
+                },
+                {
+                  loader: 'ts-loader',
+                  options: {
+                    transpileOnly: true, // 关闭类型检查，也不会输出声明文件
+                  },
+                },
+              ],
+              exclude: /node_modules/,
+            },
+            {
               test: /\.(js?x)$/,
               use: [
                 {
@@ -60,17 +79,8 @@ module.exports = (env) => {
                 {
                   loader: 'babel-loader',
                   options: {
-                    presets: [
-                      ['@babel/preset-env', { modules: false }],
-                      '@babel/preset-react',
-                    ],
-                    plugins: [
-                      [
-                        '@babel/plugin-transform-runtime',
-                      ],
-                    ],
-                    cacheDirectory: true, // 开启babel编译缓存 [缓存之前的 Eslint 检查 和 Babel 编译结果，第二次打包时速度就会更快]
-                    cacheCompression: false, // 缓存文件不要压缩
+                    cacheDirectory: true,
+                    cacheCompression: false,
                   },
                 },
               ],
@@ -86,14 +96,6 @@ module.exports = (env) => {
               use: [
                 ...getStyleLoaders('less-loader'),
               ],
-            },
-            {
-              test: /\.ts(x)?$/,
-              loader: 'ts-loader',
-              options: {
-                transpileOnly: true,
-              },
-              exclude: /node_modules/,
             },
             {
               test: /\.(svg|png|jpe?g)$/,
@@ -180,7 +182,7 @@ module.exports = (env) => {
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname,'./src'),
+        '@': path.resolve(__dirname, './src'),
       },
       extensions: ['.tsx', '.ts', '.js'],
     },

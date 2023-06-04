@@ -4,6 +4,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --env development",
+    "build:dev": "vite build",
     "start:dev": "vite",
     "preview": "vite preview",
     "prepare": "husky install",

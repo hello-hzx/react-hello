@@ -4,6 +4,7 @@ import { resolve } from "path";
 export default defineConfig(() => {
 
   return {
+    base: './',
     resolve: {
       alias: {
         "@": resolve(__dirname, "./src")
@@ -22,7 +23,7 @@ export default defineConfig(() => {
     ],
     // build configure
     build: {
-      outDir: "dist",
+      outDir: "build",
 
       minify: "esbuild",
       rollupOptions: {

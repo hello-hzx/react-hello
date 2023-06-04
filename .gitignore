@@ -8,6 +8,7 @@
 
 # production
 /dist
+/build
 
 # lock
 package-lock.json

@@ -22,11 +22,29 @@ function App() {
     <>
       <div className="start-option">
         <Button onClick={onClick}>多页面</Button>
-        <Button icon={<SiAxios />} onClick={() => change('AxiosComp')}>Axios</Button>
-        <Button icon={<SiMobx />} onClick={() => change('MobxComp')}>Mobx</Button>
-        <Button icon={<SiRedux />} onClick={() => change('ReduxComp')}>Redux</Button>
-        <Button icon={<SiReact />} onClick={() => change('ReactComp')}>React</Button>
-        <Button icon={<SiReactrouter />} onClick={() => change('RouterComp')}>React Router</Button>
+        <Button
+          icon={<SiAxios />}
+          onClick={() => change('AxiosComp')}
+        >Axios
+        </Button>
+        <Button
+          icon={<SiMobx />}
+          onClick={() => change('MobxComp')}
+        >Mobx
+        </Button>
+        <Button
+          icon={<SiRedux />}
+          onClick={() => change('ReduxComp')}
+        >Redux
+        </Button>
+        <Button
+          icon={<SiReact />}
+          onClick={() => change('ReactComp')}
+        >React
+        </Button>
+        <Button icon={<SiReactrouter />} onClick={() => change('RouterComp')}>React
+          Router
+        </Button>
       </div>
       {
         name && <Comp />
