@@ -8,10 +8,8 @@ export type Commit = {
 };
 
 /** 发送请求 */
-request1.get<Commit[]>({
+export const send1 = async () => request1.get<Commit[]>({
   url: '/repos/javascript-tutorial/en.javascript.info/commits',
-}).then((res) => {
-  window.console.log(res);
 });
 
 // request1.request({

@@ -5,7 +5,11 @@ import ReactRedux, { ReactReduxHooks, ReduxRequestToStore } from './ReactRedux';
 import { store } from './Store';
 import { ReduxRtk } from './rtk';
 
-// https://cn.redux.js.org
+/**
+ * https://cn.redux.js.org
+ *
+ * 数据流：https://cn.redux.js.org/tutorials/essentials/part-1-overview-concepts#redux-%E6%95%B0%E6%8D%AE%E6%B5%81
+ */
 export const ReduxComp = () => (
   <>
     <h1>Redux</h1>
