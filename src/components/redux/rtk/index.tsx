@@ -10,11 +10,14 @@ const Show = () => {
   const dispatch = useAppDispatch();
   return (
     <Button
-      onClick={() => {
+      onClick={async () => {
         dispatch(addAge(2));
-        // 这个 @ts-ignore 待解决
-        // @ts-ignore
-        dispatch(requestToStoreAction({ key: 'a' })); // 这里可以传参（可选）
+        try {
+          const result = await dispatch(requestToStoreAction({ key: 'a' })).unwrap(); // 这里可以传参（可选）
+          console.log(result);
+        } catch (e) {
+          // error
+        }
       }}
     >
       ReduxRtk: {person.obj.age}

@@ -64,7 +64,7 @@ export const { addAge } = personSlice.actions;
 
 export const requestToStoreAction = createAsyncThunk(
   'request/age',
-  async (info, store) => {
+  async (info: any, store) => {
     const commits = await request1.get<Commit[]>({
       url: '/repos/javascript-tutorial/en.javascript.info/commits',
     });
