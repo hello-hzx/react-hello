@@ -3,7 +3,7 @@ const initStore = {
 };
 export function ageReducer(state = initStore, action) {
   switch (action.type) {
-    case 'changeAge': {
+    case "changeAge": {
       return { ...state, age: action.age };
     }
     default: {

@@ -1,45 +1,50 @@
-const os = require('node:os');
-const path = require('node:path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const ESLintWebpackPlugin = require('eslint-webpack-plugin');
+const os = require("node:os");
+const path = require("node:path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerWebpackPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const ESLintWebpackPlugin = require("eslint-webpack-plugin");
 
 // cpu核数，多进程打包
 const threads = os.cpus().length;
 
 module.exports = (env) => {
   const isEnvDevelopment = env.development;
-  const getStyleLoaders = (preLoader) => [
-    isEnvDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-    {
-      loader: 'css-loader',
-      options: {
-        importLoaders: 1,
+  const getStyleLoaders = (preLoader) =>
+    [
+      isEnvDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
+      {
+        loader: "css-loader",
+        options: {
+          importLoaders: 1,
+        },
       },
-    },
-    {
-      loader: 'postcss-loader',
-    },
-    preLoader,
-  ].filter(Boolean);
+      {
+        loader: "postcss-loader",
+      },
+      preLoader,
+    ].filter(Boolean);
 
   return {
     entry: {
-      about: './src/About.tsx',
-      index: './src/index.tsx',
+      about: "./src/About.tsx",
+      index: "./src/index.tsx",
     },
-    mode: isEnvDevelopment ? 'development' : 'production',
-    devtool: isEnvDevelopment ? 'inline-source-map' : 'source-map',
+    mode: isEnvDevelopment ? "development" : "production",
+    devtool: isEnvDevelopment ? "inline-source-map" : "source-map",
     output: {
-      path: path.resolve(__dirname, './dist'),
+      path: path.resolve(__dirname, "./dist"),
       // 入口文件打包输出资源命名方式
-      filename: isEnvDevelopment ? 'asset/js/[name].js' : 'asset/js/[name].[contenthash:8].js',
+      filename: isEnvDevelopment
+        ? "asset/js/[name].js"
+        : "asset/js/[name].[contenthash:8].js",
       // 动态导入输出资源命名方式
-      chunkFilename: 'asset/js/[name].chunk.js',
+      chunkFilename: "asset/js/[name].chunk.js",
       // 图片、字体等资源命名方式
-      assetModuleFilename: isEnvDevelopment ? 'asset/media/[name][ext]' : 'asset/media/[contenthash:8][ext]',
+      assetModuleFilename: isEnvDevelopment
+        ? "asset/media/[name][ext]"
+        : "asset/media/[contenthash:8][ext]",
       clean: true,
       pathinfo: false,
     },
@@ -47,19 +52,20 @@ module.exports = (env) => {
       strictExportPresence: true,
       rules: [
         {
-          oneOf: [ // 打包时每个文件都会经过所有 loader 处理，`test` 正则不匹配不处理，但是都要过一遍。比较慢。
+          oneOf: [
+            // 打包时每个文件都会经过所有 loader 处理，`test` 正则不匹配不处理，但是都要过一遍。比较慢。
             {
               test: /\.ts(x)?$/,
               use: [
                 {
-                  loader: 'babel-loader',
+                  loader: "babel-loader",
                   options: {
                     cacheDirectory: true, // 开启babel编译缓存 [缓存之前的 Eslint 检查 和 Babel 编译结果，第二次打包时速度就会更快]
                     cacheCompression: false, // 缓存文件不要压缩
                   },
                 },
                 {
-                  loader: 'ts-loader',
+                  loader: "ts-loader",
                   options: {
                     transpileOnly: true, // 关闭类型检查，也不会输出声明文件
                   },
@@ -71,13 +77,13 @@ module.exports = (env) => {
               test: /\.(js?x)$/,
               use: [
                 {
-                  loader: 'thread-loader', // 开启多进程
+                  loader: "thread-loader", // 开启多进程
                   options: {
                     workers: threads, // 数量
                   },
                 },
                 {
-                  loader: 'babel-loader',
+                  loader: "babel-loader",
                   options: {
                     cacheDirectory: true,
                     cacheCompression: false,
@@ -93,13 +99,11 @@ module.exports = (env) => {
             },
             {
               test: /\.less$/,
-              use: [
-                ...getStyleLoaders('less-loader'),
-              ],
+              use: [...getStyleLoaders("less-loader")],
             },
             {
               test: /\.(svg|png|jpe?g)$/,
-              type: 'asset',
+              type: "asset",
               parser: {
                 dataUrlCondition: {
                   maxSize: 10 * 1024,
@@ -112,45 +116,49 @@ module.exports = (env) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        inject: 'body',
-        template: 'public/index.html',
-        favicon: 'public/favicon.ico',
-        filename: 'index.html',
-        chunks: ['index'],
+        inject: "body",
+        template: "public/index.html",
+        favicon: "public/favicon.ico",
+        filename: "index.html",
+        chunks: ["index"],
       }),
       new HtmlWebpackPlugin({
-        inject: 'body',
-        template: 'public/index.html',
-        favicon: 'public/favicon.ico',
-        filename: 'about.html',
-        chunks: ['about'],
+        inject: "body",
+        template: "public/index.html",
+        favicon: "public/favicon.ico",
+        filename: "about.html",
+        chunks: ["about"],
       }),
       new MiniCssExtractPlugin({
-        filename: isEnvDevelopment ? 'asset/css/[name].css' : 'asset/css/[name].[contenthash:8].css',
-        chunkFilename: isEnvDevelopment ? 'asset/css/[name].css' : 'asset/css/[name].[contenthash:8].css',
+        filename: isEnvDevelopment
+          ? "asset/css/[name].css"
+          : "asset/css/[name].[contenthash:8].css",
+        chunkFilename: isEnvDevelopment
+          ? "asset/css/[name].css"
+          : "asset/css/[name].[contenthash:8].css",
       }),
       new ESLintWebpackPlugin({
-        context: path.resolve(__dirname, 'src'),
-        exclude: 'node_modules', // 默认值
+        context: path.resolve(__dirname, "src"),
+        exclude: "node_modules", // 默认值
         cache: true, // 开启缓存
         // 缓存目录
         cacheLocation: path.resolve(
           __dirname,
-          '../node_modules/.cache/.eslintcache',
+          "../node_modules/.cache/.eslintcache"
         ),
         threads, // 开启多进程
       }),
-
     ],
     optimization: {
       minimize: !isEnvDevelopment,
-      splitChunks: { // 代码分割配置
-        chunks: 'all',
+      splitChunks: {
+        // 代码分割配置
+        chunks: "all",
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
+            name: "vendors",
+            chunks: "all",
           },
         },
       },
@@ -169,22 +177,22 @@ module.exports = (env) => {
     },
     devServer: {
       port: 80,
-      static: './dist',
+      static: "./dist",
       compress: true,
       historyApiFallback: true,
       hot: true,
       client: {
-        logging: 'none',
+        logging: "none",
         overlay: false, // 关闭浏览器页面显示eslint错误
       },
-      watchFiles: ['./src'],
+      watchFiles: ["./src"],
       open: true,
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        "@": path.resolve(__dirname, "./src"),
       },
-      extensions: ['.tsx', '.ts', '.js'],
+      extensions: [".tsx", ".ts", ".js"],
     },
     performance: false,
   };

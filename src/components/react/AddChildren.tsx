@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React, { Children } from "react";
 
 const CompA = (props: any) => {
   const { children } = props;
@@ -36,13 +36,13 @@ const compLibs = {
 };
 
 const compDataArr = [
-  { key: 'bbb1', type: 'CompB', nodes: [] },
-  { key: 'bbb2', type: 'CompB', nodes: ['ccc1'] },
-  { key: 'ccc1', type: 'CompC', nodes: ['ddd1'] },
+  { key: "bbb1", type: "CompB", nodes: [] },
+  { key: "bbb2", type: "CompB", nodes: ["ccc1"] },
+  { key: "ccc1", type: "CompC", nodes: ["ddd1"] },
 ];
 
 const AddChildren = () => {
-  const rootNodes = ['bbb1', 'bbb2'];
+  const rootNodes = ["bbb1", "bbb2"];
 
   const components = [];
   rootNodes.forEach((name) => {
@@ -57,11 +57,7 @@ const AddChildren = () => {
     }
   });
 
-  return (
-    <CompA>
-      {Children.map(components, (child) => child)}
-    </CompA>
-  );
+  return <CompA>{Children.map(components, (child) => child)}</CompA>;
 };
 
 export default AddChildren;

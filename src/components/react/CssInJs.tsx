@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import classNames from 'classnames';
+import React from "react";
+import styled from "styled-components";
+import classNames from "classnames";
 
 const AppWrapper = styled.div`
   border: 1px solid black;
@@ -10,10 +10,10 @@ const AppWrapper = styled.div`
   }
 `;
 
-const nameColor = 'red';
+const nameColor = "red";
 
 type ContentProps = {
-  nameSize: number,
+  nameSize: number;
 };
 const ContentWrapper = styled.div<ContentProps>`
   border: 1px solid red;
@@ -36,7 +36,10 @@ const CssInJs = () => (
   <AppWrapper className="app">
     <h1 className="head">标题</h1>
     {/* classNames 简单使用 */}
-    <ContentWrapper nameSize={30} className={classNames([{ content: true }, 'abc'])}>
+    <ContentWrapper
+      nameSize={30}
+      className={classNames([{ content: true }, "abc"])}
+    >
       <span className="name">jack</span>
     </ContentWrapper>
   </AppWrapper>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Button } from 'antd';
-import { CSSTransition } from 'react-transition-group';
+import React, { useState } from "react";
+import { Button } from "antd";
+import { CSSTransition } from "react-transition-group";
 
 /** CSS 动画 */
 export const ReactTransitionGroup = () => {
@@ -9,8 +9,7 @@ export const ReactTransitionGroup = () => {
   // CSS 动画 https://legacy.reactjs.org/docs/faq-styling.html#can-i-do-animations-in-react
   const style = (
     <style>
-      {
-      `
+      {`
       .hello-enter {
        opacity: 0;
       }
@@ -26,8 +25,7 @@ export const ReactTransitionGroup = () => {
         opacity: 0;
         transition: opacity 1s ease;
       }
-      `
-    }
+      `}
     </style>
   );
 

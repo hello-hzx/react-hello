@@ -1,16 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-} from 'react-router-dom';
-import { Button } from 'antd';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Button } from "antd";
 
 const AboutA = () => {
   const onClick = () => {
-    window.open('/');
+    window.open("/");
   };
   return (
     <>
@@ -20,7 +15,7 @@ const AboutA = () => {
   );
 };
 
-const AboutB = () => (<h1>About B</h1>);
+const AboutB = () => <h1>About B</h1>;
 
 function AboutApp() {
   return (
@@ -35,6 +30,6 @@ function AboutApp() {
 }
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
+  document.getElementById("root") as HTMLElement
 );
 root.render(<AboutApp />);

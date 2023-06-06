@@ -1,16 +1,16 @@
-import { createStore } from 'redux';
+import { createStore } from "redux";
 
 const initStore = {
-  name: 'zs',
+  name: "zs",
   age: 11,
 };
 
 function reducer(state = initStore, action) {
   switch (action.type) {
-    case 'changeName': {
+    case "changeName": {
       return { ...state, name: action.name };
     }
-    case 'changeAge': {
+    case "changeAge": {
       return { ...state, age: action.age };
     }
     default: {

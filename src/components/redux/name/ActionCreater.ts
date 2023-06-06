@@ -1,1 +1,4 @@
-export const changeNameCreator = (name: string) => ({ type: 'changeName', name });
+export const changeNameCreator = (name: string) => ({
+  type: "changeName",
+  name,
+});

@@ -1,21 +1,19 @@
-import React from 'react';
-import {
-  autorun, makeAutoObservable, observable, reaction,
-} from 'mobx';
-import { Button } from 'antd';
-import { observer } from 'mobx-react';
-import { MobxMore } from './MobxMore';
+import React from "react";
+import { autorun, makeAutoObservable, observable, reaction } from "mobx";
+import { Button } from "antd";
+import { observer } from "mobx-react";
+import { MobxMore } from "./MobxMore";
 
 class Doubler {
   // make(Auto)Observable 仅支持已经定义的属性。
   // 确保在你使用 make(Auto)Observable 之前已经为所有属性赋了值。
   // 如果没有正确的配置，已经声明而未初始化的字段（例如：class X { y; }）将无法被正确侦测到。
-  data = { value: 0, key: 'name' };
+  data = { value: 0, key: "name" };
 
   name;
 
   constructor() {
-    this.name = 'js';
+    this.name = "js";
     // observable.struct 与现有值结构相等的任何赋值都会被忽略。
     makeAutoObservable(this, { data: observable.struct });
   }
@@ -39,7 +37,7 @@ const doubler = new Doubler();
  * 2. value 发生开改变时触发
  * */
 autorun(() => {
-  console.log('autorun:', doubler.data.value);
+  console.log("autorun:", doubler.data.value);
 });
 
 /**
@@ -50,10 +48,10 @@ reaction(
   () => doubler.isExceed,
   (exceed) => {
     if (exceed) {
-      console.log('exceed');
+      console.log("exceed");
     }
-    console.log('reaction:', doubler.data.value);
-  },
+    console.log("reaction:", doubler.data.value);
+  }
 );
 /**
  * 当 observer 需要和装饰器或者其他高阶组件（HOC）一起使用时，

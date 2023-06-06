@@ -1,9 +1,9 @@
 const initStore = {
-  name: 'zs',
+  name: "zs",
 };
 export function nameReducer(state = initStore, action) {
   switch (action.type) {
-    case 'changeName': {
+    case "changeName": {
       return { ...state, name: action.name };
     }
     default: {

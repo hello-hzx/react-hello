@@ -1,18 +1,14 @@
-import React from 'react';
-import { Button } from 'antd';
-import {
-  connect, shallowEqual, useDispatch, useSelector,
-} from 'react-redux';
-import { changeNameCreator } from './name/ActionCreater';
-import { requestData } from './age/ActionCreater';
+import React from "react";
+import { Button } from "antd";
+import { connect, shallowEqual, useDispatch, useSelector } from "react-redux";
+import { changeNameCreator } from "./name/ActionCreater";
+import { requestData } from "./age/ActionCreater";
 
 const ReactRedux = (props: any) => {
   const onClick = () => {
     props.changeName(`${props.name}-toProps`);
   };
-  return (
-    <Button onClick={onClick}>ReactRedux: {props.name}</Button>
-  );
+  return <Button onClick={onClick}>ReactRedux: {props.name}</Button>;
 };
 
 const mapStateToProps = (state) => ({
@@ -43,9 +39,7 @@ export const ReactReduxHooks = () => {
   const onClick = () => {
     dispatch(changeNameCreator(`${info.name.name}-hook`));
   };
-  return (
-    <Button onClick={onClick}>ReactReduxHooks: {info.name.name}</Button>
-  );
+  return <Button onClick={onClick}>ReactReduxHooks: {info.name.name}</Button>;
 };
 
 /**
@@ -57,11 +51,8 @@ export const ReactReduxHooks = () => {
  * */
 export const ReduxRequestToStore = () => {
   const info = useSelector(
-    (data: {
-      name: { name: string },
-      age: { age: number }
-    }) => data,
-    shallowEqual,
+    (data: { name: { name: string }; age: { age: number } }) => data,
+    shallowEqual
   );
   const dispatch = useDispatch();
 
@@ -69,7 +60,5 @@ export const ReduxRequestToStore = () => {
     // 这里不知道是什么问题 强制为 any，在类式组件中使用是没有问题的
     dispatch(requestData() as any);
   };
-  return (
-    <Button onClick={onClick}>ReduxRequestToStore: {info.age.age}</Button>
-  );
+  return <Button onClick={onClick}>ReduxRequestToStore: {info.age.age}</Button>;
 };

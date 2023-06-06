@@ -2,13 +2,12 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 export default defineConfig(() => {
-
   return {
-    base: './',
+    base: "./",
     resolve: {
       alias: {
-        "@": resolve(__dirname, "./src")
-      }
+        "@": resolve(__dirname, "./src"),
+      },
     },
     // server config
     server: {
@@ -18,9 +17,7 @@ export default defineConfig(() => {
       cors: true,
     },
     // plugins
-    plugins: [
-      react(),
-    ],
+    plugins: [react()],
     // build configure
     build: {
       outDir: "build",
@@ -33,9 +30,9 @@ export default defineConfig(() => {
           // Static resource classification and packaging
           chunkFileNames: "assets/js/[name]-[hash].js",
           entryFileNames: "assets/js/[name]-[hash].js",
-          assetFileNames: "assets/[ext]/[name]-[hash].[ext]"
-        }
-      }
-    }
+          assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
+        },
+      },
+    },
   };
 });

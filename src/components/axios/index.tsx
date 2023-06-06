@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button } from 'antd';
-import { send1 } from '@/components/axios/service/module/User';
+import React from "react";
+import { Button } from "antd";
+import { send1 } from "@/components/axios/service/module/User";
 
 export const AxiosComp: React.FC = () => {
   const send = async () => {

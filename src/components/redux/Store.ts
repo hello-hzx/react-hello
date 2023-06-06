@@ -1,9 +1,7 @@
-import {
-  applyMiddleware, combineReducers, compose, createStore,
-} from 'redux';
-import thunk from 'redux-thunk';
-import { nameReducer } from './name/Reducer';
-import { ageReducer } from './age/Reducer';
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import thunk from "redux-thunk";
+import { nameReducer } from "./name/Reducer";
+import { ageReducer } from "./age/Reducer";
 
 /** 业务被拆分 redux 初始化数据 */
 // const initStore:InfoType = {
@@ -37,7 +35,8 @@ const reducer = combineReducers({
 });
 
 /** 打开 redux-devtool */
-const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /**
  * 1. 整个应用程序的state被存储在一颗 object tree 中， 方便维护，追踪、修改
  * 2. state只读，唯一修改State的方法一定是触发action
@@ -47,7 +46,10 @@ const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ||
  * https://github.com/reduxjs/redux-devtools/tree/main/extension#installation
  * */
 // export const store = createStore(reducer, applyMiddleware(thunk));
-export const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+export const store = createStore(
+  reducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 /**
  * 规范文件目录

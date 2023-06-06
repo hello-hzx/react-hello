@@ -1,12 +1,12 @@
-import React, { useRef } from 'react';
-import './i18n';
-import { Trans, useTranslation } from 'react-i18next';
-import { Button } from 'antd';
+import React, { useRef } from "react";
+import "./i18n";
+import { Trans, useTranslation } from "react-i18next";
+import { Button } from "antd";
 
 // 语言切换
 const lngs = {
-  en: { nativeName: 'English' },
-  zh: { nativeName: 'Chinese' },
+  en: { nativeName: "English" },
+  zh: { nativeName: "Chinese" },
 };
 
 /**
@@ -27,7 +27,9 @@ export const I18nextReact = () => {
           {Object.keys(lngs).map((lng) => (
             <Button
               key={lng}
-              style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }}
+              style={{
+                fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
+              }}
               onClick={() => {
                 nativeName.current = lngs[lng].nativeName;
                 return i18n.changeLanguage(lng);
@@ -38,7 +40,9 @@ export const I18nextReact = () => {
           ))}
         </div>
         <p>
-          <Trans i18nKey="description.part1"> {/* 使用 Trans 组件 */}
+          <Trans i18nKey="description.part1">
+            {" "}
+            {/* 使用 Trans 组件 */}
             Edit <code>src/App.js</code> and save to reload.
           </Trans>
         </p>
@@ -48,7 +52,7 @@ export const I18nextReact = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {t('description.part2', { nativeName: nativeName.current })}
+          {t("description.part2", { nativeName: nativeName.current })}
         </a>
       </header>
     </div>
