@@ -7,3 +7,8 @@
 - 滚动：https://github.com/fisshy/react-scroll
 - React 列表：https://github.com/clauderic/react-sortable-hoc
 - react-use：https://github.com/streamich/react-use
+- json相关：
+  - https://github.com/janl/node-jsonpointer
+  - https://github.com/JSONPath-Plus/JSONPath
+  - https://github.com/sindresorhus/parse-json
+  - https://github.com/ajv-validator/ajv
