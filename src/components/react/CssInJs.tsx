@@ -32,17 +32,19 @@ const ContentWrapper = styled.div<ContentProps>`
  *
  *
  * */
-const CssInJs = () => (
-  <AppWrapper className="app">
-    <h1 className="head">标题</h1>
-    {/* classNames 简单使用 */}
-    <ContentWrapper
-      nameSize={30}
-      className={classNames([{ content: true }, "abc"])}
-    >
-      <span className="name">jack</span>
-    </ContentWrapper>
-  </AppWrapper>
-);
+function CssInJs() {
+  return (
+    <AppWrapper className="app">
+      <h1 className="head">标题</h1>
+      {/* classNames 简单使用 */}
+      <ContentWrapper
+        nameSize={30}
+        className={classNames([{ content: true }, "abc"])}
+      >
+        <span className="name">jack</span>
+      </ContentWrapper>
+    </AppWrapper>
+  );
+}
 
 export default CssInJs;

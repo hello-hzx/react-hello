@@ -15,7 +15,7 @@ const lngs = {
  *
  *  npm install i18next react-i18next i18next-browser-languagedetector
  * */
-export const I18nextReact = () => {
+export function I18nextReact() {
   const { t, i18n } = useTranslation(); // 使用 hook
 
   const nativeName = useRef();
@@ -57,4 +57,4 @@ export const I18nextReact = () => {
       </header>
     </div>
   );
-};
+}

@@ -6,13 +6,15 @@ import CssInJs from "./CssInJs";
 import { I18nextReact } from "./i18next-react";
 import { ReactColor } from "./ReactColor";
 
-export const ReactComp = () => (
-  <>
-    <ReactColor />
-    <I18nextReact />
-    <AddChildren />
-    <ClassComponent />
-    <ReactTransitionGroup />
-    <CssInJs />
-  </>
-);
+export function ReactComp() {
+  return (
+    <>
+      <ReactColor />
+      <I18nextReact />
+      <AddChildren />
+      <ClassComponent />
+      <ReactTransitionGroup />
+      <CssInJs />
+    </>
+  );
+}

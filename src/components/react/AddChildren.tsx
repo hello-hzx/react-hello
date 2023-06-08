@@ -1,6 +1,6 @@
 import React, { Children } from "react";
 
-const CompA = (props: any) => {
+function CompA(props: any) {
   const { children } = props;
   return (
     <div>
@@ -8,9 +8,9 @@ const CompA = (props: any) => {
       {!!children && children}
     </div>
   );
-};
+}
 
-const CompB = (props: any) => {
+function CompB(props: any) {
   const children = props?.children;
   return (
     <div>
@@ -18,9 +18,9 @@ const CompB = (props: any) => {
       {!!children && children}
     </div>
   );
-};
+}
 
-const CompC = (props: any) => {
+function CompC(props: any) {
   const { children } = props;
   return (
     <div>
@@ -28,7 +28,7 @@ const CompC = (props: any) => {
       {!!children && children}
     </div>
   );
-};
+}
 
 const compLibs = {
   CompB: <CompB />,
@@ -41,7 +41,7 @@ const compDataArr = [
   { key: "ccc1", type: "CompC", nodes: ["ddd1"] },
 ];
 
-const AddChildren = () => {
+function AddChildren() {
   const rootNodes = ["bbb1", "bbb2"];
 
   const components = [];
@@ -58,6 +58,6 @@ const AddChildren = () => {
   });
 
   return <CompA>{Children.map(components, (child) => child)}</CompA>;
-};
+}
 
 export default AddChildren;

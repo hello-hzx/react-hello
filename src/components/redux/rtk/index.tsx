@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/components/redux/rtk/hooks";
 import { store } from "./Store";
 import { addAge, requestToStoreAction } from "./modules/Person";
 
-const Show = () => {
+function Show() {
   const { person } = useAppSelector((state) => state, shallowEqual);
   const dispatch = useAppDispatch();
   return (
@@ -25,10 +25,12 @@ const Show = () => {
       ReduxRtk: {person.obj.age}
     </Button>
   );
-};
+}
 
-export const ReduxRtk = () => (
-  <Provider store={store}>
-    <Show />
-  </Provider>
-);
+export function ReduxRtk() {
+  return (
+    <Provider store={store}>
+      <Show />
+    </Provider>
+  );
+}

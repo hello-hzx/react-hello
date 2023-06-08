@@ -13,7 +13,9 @@ import { Button } from "antd";
 import { WithRouter } from "./hoc/WithRouter";
 
 /** Home 子组件 UserInfo */
-const UserInfo = () => <h1>name: Trump</h1>;
+function UserInfo() {
+  return <h1>name: Trump</h1>;
+}
 
 /** Home 类式子组件 UserCar */
 class UserCar extends PureComponent<any, any> {
@@ -36,7 +38,7 @@ class UserCar extends PureComponent<any, any> {
 
 const UserCarWrapped = WithRouter(UserCar);
 
-const Home = () => {
+function Home() {
   const navigate = useNavigate(); // 用于跳转页面
   const params = useParams(); // 用于获取路径参数 /user/:id
   const location = useLocation(); // 用于获取查询字符串 /user?name=tom&age=18
@@ -71,24 +73,28 @@ const Home = () => {
       </Button>
     </>
   );
-};
-const About = () => (
-  <>
-    <h1>About</h1>
-    <Button>
-      <Link to="/home">to Home</Link>
-    </Button>
-  </>
-);
+}
+function About() {
+  return (
+    <>
+      <h1>About</h1>
+      <Button>
+        <Link to="/home">to Home</Link>
+      </Button>
+    </>
+  );
+}
 
-const NotFound = () => (
-  <>
-    <h1>Not Found</h1>
-    <Button>
-      <Link to="/home">to Home</Link>
-    </Button>
-  </>
-);
+function NotFound() {
+  return (
+    <>
+      <h1>Not Found</h1>
+      <Button>
+        <Link to="/home">to Home</Link>
+      </Button>
+    </>
+  );
+}
 
 /** 以配置的形式使用路由 */
 const routers = [
@@ -109,23 +115,6 @@ const routers = [
   { path: "*", element: <NotFound /> },
 ];
 
-export const ReactRouter = () => (
-  // <>
-  //   <div className="content">
-  //     {/* router5 中叫 Switch */}
-  //     <Routes>
-  //       {/* router5 中element叫component, Navigate叫Redirect，Navigate出现自动跳到指定to */}
-  //       <Route path="/" element={<Navigate to="/home" />} />
-  //       <Route path="/home" element={<Home />}>
-  //         {/* 子路由 */}
-  //         <Route path="/home" element={<Navigate to="/home/user/info?name=Trump&age=0" />} />
-  //         <Route path="/home/user/info" element={<UserInfo />} />
-  //         <Route path="/home/user/car" element={<UserCarWrapped />} />
-  //       </Route>
-  //       <Route path="/about" element={<About />} />
-  //       <Route path="*" element={<NotFound />} />
-  //     </Routes>
-  //   </div>
-  // </>
-  <div className="content">{useRoutes(routers)}</div>
-);
+export function ReactRouter() {
+  return <div className="content">{useRoutes(routers)}</div>;
+}

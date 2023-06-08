@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RGBColor, SketchPicker } from "react-color";
 import { Popover } from "antd";
 
-export const ReactColor = () => {
+export function ReactColor() {
   const [color, setColor] = useState<RGBColor>({
     r: 241,
     g: 112,
@@ -35,4 +35,4 @@ export const ReactColor = () => {
       />
     </Popover>
   );
-};
+}

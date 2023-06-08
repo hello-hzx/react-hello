@@ -7,6 +7,7 @@ module.exports = {
   extends: [
     "airbnb",
     "airbnb-typescript",
+    "plugin:import/typescript",
     "plugin:react-hooks/recommended",
     "prettier",
   ],
@@ -20,9 +21,8 @@ module.exports = {
   plugins: ["react"],
   settings: {
     "import/resolver": {
-      typescript: {
-        directory: "./tsconfig.json",
-      },
+      typescript: true,
+      node: true,
     },
   },
   rules: {

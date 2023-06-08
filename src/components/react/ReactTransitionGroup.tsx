@@ -3,7 +3,7 @@ import { Button } from "antd";
 import { CSSTransition } from "react-transition-group";
 
 /** CSS 动画 */
-export const ReactTransitionGroup = () => {
+export function ReactTransitionGroup() {
   const [show, setShow] = useState(true);
 
   // CSS 动画 https://legacy.reactjs.org/docs/faq-styling.html#can-i-do-animations-in-react
@@ -39,4 +39,4 @@ export const ReactTransitionGroup = () => {
       </CSSTransition>
     </div>
   );
-};
+}

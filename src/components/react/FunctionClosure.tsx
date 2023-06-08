@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 
 /** 函数闭包的体现 */
-export const FunctionClosure = () => {
+export function FunctionClosure() {
   const [name, setName] = useState("c#");
 
   /** useCallback 记忆函数，如果[]为空，onClick函数一直是最开始的那个，name由于闭包name一直是‘c#’ */
@@ -10,7 +10,7 @@ export const FunctionClosure = () => {
   }, [name]);
 
   return <button onClick={onClick}>btn: {name}</button>;
-};
+}
 
 const fun = (_name: string) => () => {
   // window.console.log(name);

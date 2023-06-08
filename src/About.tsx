@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Button } from "antd";
 
-const AboutA = () => {
+function AboutA() {
   const onClick = () => {
     window.open("/");
   };
@@ -13,9 +13,11 @@ const AboutA = () => {
       <Button onClick={onClick}>Home</Button>
     </>
   );
-};
+}
 
-const AboutB = () => <h1>About B</h1>;
+function AboutB() {
+  return <h1>About B</h1>;
+}
 
 function AboutApp() {
   return (
