@@ -1,9 +1,9 @@
 import React from "react";
 import { Provider, shallowEqual } from "react-redux";
 import { Button } from "antd";
-import { useAppDispatch, useAppSelector } from "@/components/redux/rtk/hooks";
+import { useAppDispatch, useAppSelector } from "@/components/redux/rtk2/hooks";
 import { store } from "./Store";
-import { requestToStoreAction } from "./modules/Person";
+import { addAge, requestToStoreAction } from "./modules/Person";
 
 function Show() {
   const { person } = useAppSelector((state) => state, shallowEqual);
@@ -11,17 +11,18 @@ function Show() {
   return (
     <Button
       onClick={async () => {
+        dispatch(addAge(2));
         try {
           const result = await dispatch(
             requestToStoreAction({ key: "a" })
           ).unwrap(); // 这里可以传参（可选）
-          console.log("result", result);
+          console.log(result);
         } catch (e) {
           // error
         }
       }}
     >
-      ReduxRtk: {person?.ids?.[0]}
+      ReduxRtk: {person.obj.age}
     </Button>
   );
 }

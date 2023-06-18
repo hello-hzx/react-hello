@@ -1,78 +1,59 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { request1 } from "../../../axios/service";
-import { Commit } from "../../../axios/service/module/User";
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+} from "@reduxjs/toolkit";
+import { Commit, send1 } from "../../../axios/service/module/User";
 
-type PersonStateType = {
-  key: string;
-  obj: {
-    name: string;
-    age: number;
-  };
-};
+export const requestToStoreAction = createAsyncThunk(
+  "requestToStoreAction",
+  async (_info: any, _store) => {
+    const commits = await send1();
 
-const initialState: PersonStateType = {
-  key: "66",
-  obj: {
-    name: "Jack",
-    age: 12,
-  },
-};
+    return commits.map((item) => ({ ...item, id: item.sha }));
+  }
+);
+
+const postsAdapter = createEntityAdapter<Commit>();
+
+// getInitialState 返回{ids: [], entities: {}}规范化状态对象。postsSlice需要为加载状态保留status和error字段
+const initialState = postsAdapter.getInitialState({
+  status: "idle",
+  error: null,
+});
 
 // person slice
 const personSlice = createSlice({
   name: "person",
   initialState,
   reducers: {
-    addAge(state, action: PayloadAction<number>) {
-      const { payload } = action;
-      state.obj.age += payload;
+    postUpdated(state, action) {
+      const { id, title, content } = action.payload;
+      const existingPost = state.entities[id];
+      if (existingPost) {
+        existingPost.title = title;
+        existingPost.content = content;
+      }
     },
   },
-  /** 异步请求写法一 */
-  // extraReducers: {
-  //   [requestToStoreAction.pending]() { // 请求中
-  //     console.log('pending');
-  //   },
-  //   [requestToStoreAction.fulfilled](state, action) { // 响应
-  //     const { payload } = action;
-  //     console.log('fulfilled', payload);
-  //     state.obj.age = payload.length;
-  //   },
-  //   [requestToStoreAction.rejected](_state, _action) { // 失败
-  //     console.log('rejected');
-  //   }
-  // },
-
-  /** 异步请求写法二 */
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(requestToStoreAction.pending, () => {
-  //     })
-  //     .addCase(requestToStoreAction.fulfilled, (state, action) => {
-  //       const {payload} = action;
-  //       console.log('fulfilled', payload);
-  //       state.obj.age = payload.length;
-  //     })
-  //     .addCase(requestToStoreAction.rejected, (_state, _action) => {
-  //     })
-  // },
+  extraReducers: (builder) => {
+    builder
+      .addCase(requestToStoreAction.pending, () => {})
+      .addCase(requestToStoreAction.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        // 使用' upsertMany ' reducer作为一个可变的更新实用程序
+        postsAdapter.upsertMany(state, action.payload);
+      })
+      .addCase(requestToStoreAction.rejected, (_state, _action) => {});
+  },
 });
 
-export const { addAge } = personSlice.actions;
-
-export const requestToStoreAction = createAsyncThunk(
-  "request/age",
-  async (info: any, store) => {
-    const commits = await request1.get<Commit[]>({
-      url: "/repos/javascript-tutorial/en.javascript.info/commits",
-    });
-
-    // 异步请求写法三（直接不用写一或二）
-    const { dispatch } = store;
-    dispatch(addAge(commits.length));
-
-    return commits;
-  }
-);
+// Export the customized selectors for this adapter using `getSelectors`
+export const {
+  selectAll: selectAllPosts,
+  selectById: selectPostById,
+  selectIds: selectPostIds,
+  // 传入一个选择器，该选择器返回帖子的状态切片
+} = postsAdapter.getSelectors((state: any) => state.posts);
 
 export default personSlice.reducer;

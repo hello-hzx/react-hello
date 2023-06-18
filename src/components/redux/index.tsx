@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { NativeRedux } from "./native-redux";
+// import { NativeRedux } from "./native-redux";
 import ReactRedux, { ReactReduxHooks, ReduxRequestToStore } from "./ReactRedux";
 import { store } from "./Store";
 import { ReduxRtk } from "./rtk";
@@ -15,7 +15,7 @@ export function ReduxComp() {
     <>
       <h1>Redux</h1>
       <ReduxRtk />
-      <NativeRedux />
+      {/* <NativeRedux /> */}
       <Provider store={store}>
         {" "}
         {/* 为redux 提供 store */}
