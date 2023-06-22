@@ -1,4 +1,5 @@
 import React from "react";
+import "@/components/jsdoc";
 
 let module = {};
 if (!Object.keys(import.meta).length) {
