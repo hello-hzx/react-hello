@@ -9,6 +9,7 @@ import {
 import { Button } from "antd";
 import "@/asset/index.less";
 import components from "@/components";
+import { MdBackupTable } from "react-icons/md";
 
 function App() {
   const [name, setName] = useState<string>();
@@ -36,6 +37,9 @@ function App() {
         </Button>
         <Button icon={<SiReactrouter />} onClick={() => change("RouterComp")}>
           React Router
+        </Button>
+        <Button icon={<MdBackupTable />} onClick={() => change("ProComp")}>
+          Pro Components
         </Button>
       </div>
       {name && <Comp />}
